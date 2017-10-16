@@ -1,4 +1,4 @@
-package Amazon;
+package testScripts;
 
 import java.io.File;
 
@@ -18,6 +18,7 @@ import libraries.ProjectSpecificMethods;
 import libraries.Utilities;
 import pageObjects.MyAccountPageObject;
 import pageObjects.SigninPageObject;
+import testData.TestDataReader;
 
 /**
  * This class file contains Test scripts
@@ -41,63 +42,24 @@ public class Amazon {
 			wait = new WebDriverWait(driver, 30);
 			signIn = new SigninPageObject(driver, wait);
 			myAccount = new MyAccountPageObject(driver, wait);
-			ProjectSpecificMethods = new ProjectSpecificMethods(driver, wait);
-			
 			
 		}
 		
 		@Test(enabled = true)
-		public void webdriverCommands() {
-		//Find Sign In element using xpath
-		WebElement signIn = driver.findElement(By.xpath("//a[@id='nav-link-yourAccount']")); 
-		String text = signIn.getText();  //Get the text of the webelement
-		Reporter.log("Sign In button text is:  "+ text, true);
+		public void webdriverCommands() throws Exception {
 		
-		signIn.click();  //Clicks the web element
+		signIn.getSignInText();
+		signIn.getSignInLink();
 		String signInTitle = driver.getTitle();  //Gets the window title
-		
-		// Verifies the Sign in Window Title with expected value using if..else statements
-		 
-		if(signInTitle.equalsIgnoreCase("Amazon Sign In")) {
-			Reporter.log("PASS - Sign in page displayed successfully", true);
-		}else {
-			Reporter.log("FAIL - Sign in page did not display successfully", true);
-		}
-		
-			
-		// Verifies the Sign in Window Title with expected value using TestNG assertions
-		Assert.assertEquals(signInTitle, "Amazon Sign In", "FAIL - Sign in page did not display successfully");
+		Assert.assertEquals(signInTitle, TestDataReader.signInAssertion, TestDataReader.signInAssertionFailMessage);
 		
 				
-		WebElement email = driver.findElement(By.id("ap_email"));  //Identify Email field
-		email.sendKeys("8147808493");  //Enter Email into the email field
-		Reporter.log("PASS - Email entered Successfully", true);
+		signIn.login(TestDataReader.email, TestDataReader.password);
 		
-		WebElement password = driver.findElement(By.id("ap_password"));  //Identify Password field
-		password.sendKeys("Madhu@87");   //Enter Password into the password field
-		Reporter.log("PASS - Password entered Successfully", true);
+		String myAccountText = myAccount.getPageTitle();
+		Assert.assertEquals(myAccountText,TestDataReader.myAccountAssertion, TestDataReader.myAccountAssertionFailMessage);
 		
-		WebElement signInButton = driver.findElement(By.id("signInSubmit")); //Identify Sign In Button
-		signInButton.click();  //Click the Sign In button
-		Reporter.log("PASS - Sign in Button Clicked Successfully", true);
-		
-		WebElement myAccount = driver.findElement(By.id("nav-link-yourAccount")); //Identify User Account
-		myAccount.click(); //Click the User Account
-		Reporter.log("PASS - User Account Clicked Successfully", true);
-		
-		String myAccountText = driver.findElement(By.xpath("//div[@class='a-row a-spacing-base']")).
-				getText();   //Identify My account text and fetch it
-		
-		//Verifies the My Account text with the expected value using Test NG assertions
-		Assert.assertEquals(myAccountText, "Your Account", "FAIL - My Account page is not displayed");
-		
-		WebElement account = driver.findElement(By.xpath("//div[@class='a-row a-spacing-base']/h1"));
-		Actions action = new Actions(driver);
-		action.moveToElement(account).build().perform();
-		WebElement signOut = driver.findElement(By.id("nav-item-signout"));
-		action.moveToElement(signOut).click().build().perform();
-		
-		driver.close();  //Closes the active Firefox browser
+		myAccount.clickSignOut();
 		
 	}
 

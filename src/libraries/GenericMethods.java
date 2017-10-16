@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * This class file contains Generic methods which we use in the selenium project
+ * This class file contains Generic methods 
  * @author Madhukara R S
  *
  */
@@ -32,38 +32,6 @@ public class GenericMethods {
 		}
 	}
 	
-	public void enterByXpath(String xpath, String value, String message ) throws Exception {
-		
-		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-			driver.findElement(By.xpath(xpath)).sendKeys(value);
-			} catch (Exception e) {
-				throw new Exception(message);
-			}
-	}
-	
-	public void enterById(String id, String value, String message) throws Exception {
-		
-		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
-			driver.findElement(By.id(id)).sendKeys(value);
-		} catch (Exception e) {
-			throw new Exception(message);
-		}
-	}
-	
-	public void mouseHoverByXpath(String xpath, String message) throws Exception {
-		
-		try {
-			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
-			WebElement element = driver.findElement(By.xpath(xpath));
-			Actions action = new Actions(driver);
-			action.moveToElement(element).build().perform();
-		}catch (Exception e) {
-			throw new Exception(message);
-		}
-	}
-
 	public String getTextByXpath(String xpath, String message) throws Exception {
 		
 		try {
@@ -72,12 +40,59 @@ public class GenericMethods {
 			
 		} catch (Exception e) {
 			throw new Exception(message);
-			
+		}
+	}
+	
+	public void enterBYXpath (String xpath, String value, String message) throws Exception {
+		
+		try {
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
+			driver.findElement(By.xpath(xpath)).sendKeys(value);
+			} catch (Exception e) {
+			throw new Exception(message);
+		}
+	}
+	
+	public void enterById (String id, String value, String message) throws Exception {
+		
+		try {
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(id)));
+			driver.findElement(By.id(id)).sendKeys(value);
+			} catch (Exception e) {
+			throw new Exception(message);
+		}
+	}
+	
+	public void mouseHoverByXpath(String xpath, String message) throws Exception {
+		
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+			WebElement element = driver.findElement(By.xpath(xpath));
+			Actions actions = new Actions(driver);
+			actions.moveToElement(element).build().perform();
+		}catch (Exception e) {
+			throw new Exception(message);
+		}
+	}
+
+	public void enterById(String id, String message) throws Exception {
+		
+		try {
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(id)));
+			driver.findElement(By.id(id));
+			} catch (Exception e) {
+			throw new Exception(message);
 		}
 		
 	}
 	
 	
-
-
 }
+
+	
+		
+
+	
+	
+
+
