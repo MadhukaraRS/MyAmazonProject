@@ -5,3 +5,8 @@ signInAssertion = Amazon Sign In
 signInAssertionFailMessage = FAIL - Sign in page did not display successfully
 myAccountAssertion = Your Account
 myAccountAssertionFailMessage = FAIL - My Account page is not displayed
+
+# AmazonRegistrationTestScript
+customerName = Madhukara
+moblieNumber = 7204040425
+customerPassword = Madhu@87

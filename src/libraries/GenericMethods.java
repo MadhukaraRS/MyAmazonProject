@@ -32,6 +32,16 @@ public class GenericMethods {
 		}
 	}
 	
+	public void clickById(String id, String message) throws Exception {
+		
+		try {
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id(id)));
+			driver.findElement(By.id(id)).click();
+		} catch (Exception e) {
+			throw new Exception(message);
+		}
+	}
+	
 	public String getTextByXpath(String xpath, String message) throws Exception {
 		
 		try {
@@ -43,7 +53,18 @@ public class GenericMethods {
 		}
 	}
 	
-	public void enterBYXpath (String xpath, String value, String message) throws Exception {
+	public String getTextById(String id, String message) throws Exception {
+		
+		try {
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id(id)));
+			return driver.findElement(By.id(id)).getText();
+			
+		} catch (Exception e) {
+			throw new Exception(message);
+		}
+	}
+	
+	public void enterByXpath (String xpath, String value, String message) throws Exception {
 		
 		try {
 			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
@@ -56,12 +77,13 @@ public class GenericMethods {
 	public void enterById (String id, String value, String message) throws Exception {
 		
 		try {
-			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(id)));
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id(id)));
 			driver.findElement(By.id(id)).sendKeys(value);
 			} catch (Exception e) {
 			throw new Exception(message);
 		}
 	}
+	
 	
 	public void mouseHoverByXpath(String xpath, String message) throws Exception {
 		

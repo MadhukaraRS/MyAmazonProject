@@ -14,9 +14,10 @@ import java.util.Properties;
 public class PropertiesReader {
 	
 	Properties prop;
+	
 	public PropertiesReader() {
 		
-		File file = new File(Configurations.testDataUrl);
+		File file = new File(Configurations.testDataPath);
 		
 		FileInputStream fileInput = null;
 		try {
@@ -61,4 +62,20 @@ public class PropertiesReader {
 	}
 	//********************************************************************************
 	
+	
+	//************************AmazonRegistrationTestScriptMadhukara*******************
+	public String getCustomerName() {
+		return prop.getProperty("customerName");
+	}
+	
+	public String getPhoneNumber() {
+		return prop.getProperty("moblieNumber");
+	}
+
+	public String getCustomerPassword() {
+		return prop.getProperty("customerPassword");
+	}
+	
+	//********************************************************************************
 }
+
