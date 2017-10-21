@@ -1,7 +1,11 @@
 package testData;
 
 import libraries.PropertiesReader;
-
+/**
+ * This class file contains Test Data Reader details
+ * @author Madhukara R S
+ *
+ */
 public class TestDataReader {
 	
 	private static PropertiesReader propertiesReader = new PropertiesReader();
@@ -12,5 +16,10 @@ public class TestDataReader {
 	public static String signInAssertionFailMessage = propertiesReader.getsignInAssertionFailMessage();
 	public static String myAccountAssertion = propertiesReader.getmyAccountAssertion();
 	public static String myAccountAssertionFailMessage = propertiesReader.getmyAccountAssertionFailMessage();
+
+	public static String customerName = propertiesReader.getCustomerName();
+	public static String phoneNumber = propertiesReader.getPhoneNumber();
+	public static String customerPassword = propertiesReader.getCustomerPassword();
+	
 
 }

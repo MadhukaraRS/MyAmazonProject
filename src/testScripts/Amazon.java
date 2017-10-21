@@ -17,11 +17,13 @@ import org.testng.annotations.Test;
 import libraries.ProjectSpecificMethods;
 import libraries.Utilities;
 import pageObjects.MyAccountPageObject;
+import pageObjects.RegistrationPageObject;
 import pageObjects.SigninPageObject;
+import results.ExtentResults;
 import testData.TestDataReader;
 
 /**
- * This class file contains Test scripts
+ * This class file contains Amazon Test scripts
  * @author Madhukara R S
  */
 public class Amazon {
@@ -33,7 +35,8 @@ public class Amazon {
 		SigninPageObject signIn;
 		MyAccountPageObject myAccount;
 		ProjectSpecificMethods projectSpecificMethods;
-			
+		ExtentResults results = new ExtentResults();
+		RegistrationPageObject register;
 		
 		
 		@BeforeTest
@@ -45,26 +48,61 @@ public class Amazon {
 			
 		}
 		
-		@Test(enabled = true)
-		public void webdriverCommands() throws Exception {
+		@Test(groups= {"Sanity", "Smoke"},enabled = true)
+		public void demoLogin() throws Exception {
+		
+		results.createtestcase(Thread.currentThread().getStackTrace()[1].getMethodName(), this.getClass().getSimpleName());
 		
 		signIn.getSignInText();
 		signIn.getSignInLink();
 		String signInTitle = driver.getTitle();  //Gets the window title
-		Assert.assertEquals(signInTitle, TestDataReader.signInAssertion, TestDataReader.signInAssertionFailMessage);
+		results.assertEquals(signInTitle, TestDataReader.signInAssertion, TestDataReader.signInAssertionFailMessage);
 		
 				
 		signIn.login(TestDataReader.email, TestDataReader.password);
 		
+		signIn.clickMyAccountPage();
 		String myAccountText = myAccount.getPageTitle();
-		Assert.assertEquals(myAccountText,TestDataReader.myAccountAssertion, TestDataReader.myAccountAssertionFailMessage);
+		results.assertEquals(myAccountText,TestDataReader.myAccountAssertion, TestDataReader.myAccountAssertionFailMessage);
 		
 		myAccount.clickSignOut();
 		
 	}
 
+		
+
+
+		@Test(groups = {"Regression"}, enabled = true) 
+		public  void amazonAccountCreation() throws Exception {
+			
+		driver = utilities.launchBrowser();
+		wait = new WebDriverWait(driver, 30);
+		signIn = new SigninPageObject(driver, wait);
+		register = new RegistrationPageObject(driver, wait);
+		myAccount = new MyAccountPageObject(driver, wait);
+		ExtentResults results = new ExtentResults();
+		//RegistrationPageObject register;
+		
+		
+		results.createtestcase(Thread.currentThread().getStackTrace()[1].getMethodName(), this.getClass().getSimpleName());
+		
+		signIn.getSignInText();
+		signIn.getSignInLink();
+		String signInTitle = driver.getTitle();  //Gets the window title
+		results.assertEquals(signInTitle, TestDataReader.signInAssertion, TestDataReader.signInAssertionFailMessage);
+		
+		register.getClickAccountButton();
+		register.getCreateAccountText();
+		register.getCreateAccountForm();
+		register.registration(TestDataReader.customerName, TestDataReader.phoneNumber, TestDataReader.customerPassword);
+		register.clickContinueButton();
+		register.clickCustomerMyAccountPage();
+		
+		
+		}
+		
 		@AfterTest
 		public void endBrowser() {
-			
+			//driver.close();
 		}
 }
