@@ -23,7 +23,7 @@ import results.ExtentResults;
 import testData.TestDataReader;
 
 /**
- * This class file contains Test scripts
+ * This class file contains Amazon Test scripts
  * @author Madhukara R S
  */
 public class Amazon {
@@ -48,7 +48,7 @@ public class Amazon {
 			
 		}
 		
-		@Test(enabled = true)
+		@Test(groups= {"Sanity", "Smoke"},enabled = true)
 		public void demoLogin() throws Exception {
 		
 		results.createtestcase(Thread.currentThread().getStackTrace()[1].getMethodName(), this.getClass().getSimpleName());
@@ -72,7 +72,7 @@ public class Amazon {
 		
 
 
-		@Test(enabled = true) 
+		@Test(groups = {"Regression"}, enabled = true) 
 		public  void amazonAccountCreation() throws Exception {
 			
 		driver = utilities.launchBrowser();
@@ -96,6 +96,7 @@ public class Amazon {
 		register.getCreateAccountForm();
 		register.registration(TestDataReader.customerName, TestDataReader.phoneNumber, TestDataReader.customerPassword);
 		register.clickContinueButton();
+		register.clickCustomerMyAccountPage();
 		
 		
 		}

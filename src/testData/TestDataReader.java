@@ -1,7 +1,11 @@
 package testData;
 
 import libraries.PropertiesReader;
-
+/**
+ * This class file contains Test Data Reader details
+ * @author Madhukara R S
+ *
+ */
 public class TestDataReader {
 	
 	private static PropertiesReader propertiesReader = new PropertiesReader();

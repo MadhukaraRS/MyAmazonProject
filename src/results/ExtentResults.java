@@ -11,7 +11,11 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import libraries.Configurations;
 
-
+/**
+ * This class file contains Extent Report details
+ * @author Madhukara R S
+ *
+ */
 public class ExtentResults {
 	
 	public static ExtentReports extreports = new ExtentReports  (Configurations.resultsPath, true);

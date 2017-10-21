@@ -6,7 +6,11 @@ import org.testng.Reporter;
 
 import libraries.GenericMethods;
 import results.ExtentResults;
-
+/**
+ * This class file contains My Registration page details
+ * @author Madhukara R S
+ *
+ */
 public class RegistrationPageObject {
 
 	WebDriver driver;
@@ -67,12 +71,10 @@ public class RegistrationPageObject {
 	}
 	
 	
-	
 	public void clickCustomerMyAccountPage() throws Exception {
 		genericMethods.clickById("//div[@class='a-box-inner']", "Fail - Verification  page did not displayed");
 		Reporter.log("Verification Page displayed Successfully");
 		
 	}
 
-	
 }
